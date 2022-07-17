@@ -1,12 +1,12 @@
 package Search;
 
-import Interface.ISearchWorker;
+import Interface.SearchWorkerInterface;
 import Model.Worker;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
-public class SearchWorkers implements ISearchWorker {
+public class SearchWorkersInterface implements SearchWorkerInterface {
 
 
     @Override

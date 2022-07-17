@@ -11,6 +11,6 @@ public interface ITDepartmentInterface {
 
     void update(int id,User user);
 
-    Employee getEmployee(int id);
+    User getUser(int id);
 
 }

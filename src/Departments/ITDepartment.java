@@ -2,13 +2,19 @@ package Departments;
 
 import Model.Abstract.Employee;
 import Model.User;
+import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ITDepartment implements Interface.ITDepartmentInterface {
 
+    @Getter
     private List<User> users;
 
+    public ITDepartment() {
+        this.users = new ArrayList<>();
+    }
 
     @Override
     public void add(User user) {
@@ -26,7 +32,7 @@ public class ITDepartment implements Interface.ITDepartmentInterface {
     }
 
     @Override
-    public Employee getEmployee(int id) {
+    public User getUser(int id) {
         return users.get(id);
     }
 }

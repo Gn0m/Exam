@@ -1,7 +1,6 @@
 package Departments;
 
-import Interface.IDepartments;
-import Interface.ITDepartmentInterface;
+import Interface.DepartmentsInterface;
 import Model.Abstract.Employee;
 import Model.Worker;
 import lombok.Getter;
@@ -11,7 +10,7 @@ import java.util.*;
 
 @Setter
 @Getter
-public class HRDepartment implements Interface.HRDepartmentInterface, IDepartments {
+public class HRDepartment implements Interface.HRDepartmentInterface, DepartmentsInterface {
 
     private List<Worker> workers;
     private Map<String,Worker> departments;
@@ -38,7 +37,7 @@ public class HRDepartment implements Interface.HRDepartmentInterface, IDepartmen
     }
 
     @Override
-    public Employee getEmployee(int id) {
+    public Worker getWorker(int id) {
         return workers.get(id);
     }
 

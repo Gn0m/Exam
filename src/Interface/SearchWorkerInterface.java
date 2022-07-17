@@ -4,7 +4,7 @@ import Model.Worker;
 
 import java.util.List;
 
-public interface ISearchWorker {
+public interface SearchWorkerInterface {
 
     List<Worker> find(String firstName, String secondName, String thirdName, List<Worker> list);
 

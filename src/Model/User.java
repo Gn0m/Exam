@@ -18,12 +18,10 @@ public class User extends Employee {
     private Worker worker;
 
     public User(String firstName, String secondName, String thirdName, Date birthday, String gender, String phoneNumber,
-                String login, String password, boolean admin, boolean hr) {
+                String login, String password) {
         super(firstName, secondName, thirdName, birthday, gender, phoneNumber);
         this.login = login;
         this.password = password;
-        this.admin = admin;
-        this.hr = hr;
     }
 
     @Override

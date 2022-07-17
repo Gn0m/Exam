@@ -2,7 +2,7 @@ package Interface;
 
 import Model.Worker;
 
-public interface IDepartments {
+public interface DepartmentsInterface {
 
     void addOrUpdateDepartment(String name, Worker worker);
 

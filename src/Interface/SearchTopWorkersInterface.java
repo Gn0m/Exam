@@ -4,7 +4,7 @@ import Model.Worker;
 
 import java.util.List;
 
-public interface ISearchTopWorkers {
+public interface SearchTopWorkersInterface {
 
     List<Worker> findTopExpensive(List<Worker> workers);
 

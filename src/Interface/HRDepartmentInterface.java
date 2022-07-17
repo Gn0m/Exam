@@ -11,5 +11,5 @@ public interface HRDepartmentInterface {
 
     void updateWorker(int id,Worker worker);
 
-    Employee getEmployee(int id);
+    Worker getWorker(int id);
 }
