@@ -1,11 +1,12 @@
 package Interface;
 
+import Departments.ITDepartment;
 import Model.User;
 
-import java.util.Date;
+
 
 public interface RegistrationInterface {
 
-    boolean registrationUser(User user);
+    boolean registrationUser(User user, ITDepartment itDepartment);
 
 }

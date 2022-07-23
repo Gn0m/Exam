@@ -1,7 +1,6 @@
 package Departments;
 
 import Interface.DepartmentsInterface;
-import Model.Abstract.Employee;
 import Model.Worker;
 import lombok.Getter;
 import lombok.Setter;

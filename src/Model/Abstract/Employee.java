@@ -1,9 +1,11 @@
 package Model.Abstract;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Calendar;
 import java.util.Date;
 
 @Getter
@@ -14,11 +16,14 @@ public abstract class Employee {
     private String firstName;
     private String secondName;
     private String thirdName;
-    private Date birthday;
+    private Calendar birthday;
     private String gender;
     private String phoneNumber;
 
-    public Employee(String firstName, String secondName, String thirdName, Date birthday, String gender, String phoneNumber) {
+    protected Employee() {
+    }
+
+    public Employee(String firstName, String secondName, String thirdName, Calendar birthday, String gender, String phoneNumber) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.thirdName = thirdName;
@@ -32,8 +37,8 @@ public abstract class Employee {
         return firstName + " " + secondName +
                 " " + thirdName;
     }
-
+    @JsonIgnore
     public String getFullName(){
-        return firstName.concat("").concat(secondName).concat(" ").concat(thirdName);
+        return secondName.concat(" ").concat(firstName).concat(" ").concat(thirdName);
     }
 }

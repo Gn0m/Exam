@@ -18,7 +18,7 @@ public class Worker extends Employee {
     private Calendar recruitmentDate;
     private boolean boss;
 
-    public Worker(String firstName, String secondName, String thirdName, Date birthday, String gender, String phoneNumber,
+    public Worker(String firstName, String secondName, String thirdName, Calendar birthday, String gender, String phoneNumber,
                   String jobTitle, String department, int salary, Calendar recruitmentDate, boolean boss) {
         super(firstName, secondName, thirdName, birthday, gender, phoneNumber);
         this.jobTitle = jobTitle;
@@ -26,6 +26,9 @@ public class Worker extends Employee {
         this.salary = salary;
         this.recruitmentDate = recruitmentDate;
         this.boss = boss;
+    }
+
+    public Worker() {
     }
 
     @Override
@@ -47,9 +50,9 @@ public class Worker extends Employee {
 
     @Override
     public String toString() {
-        return getFirstName() + " " + getSecondName() + " " + getThirdName() + " " + "\n" +
-                ", отдел: " + getDepartment() +  ", должность" + getJobTitle() + "\n" + ", зарплата: " + getSalary()
-                + "\n" + ", дата приема на работу: " + recruitmentDate;
+        return getSecondName() + " " + getFirstName() + " " + getThirdName() + " " + ", отдел: " + getDepartment()
+                +  ", должность " + getJobTitle() + "\n" + ", зарплата: " + getSalary()
+                + "\n" + ", дата приема на работу: " + recruitmentDate.getTime();
     }
 }
 

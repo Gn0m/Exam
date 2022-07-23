@@ -1,5 +1,9 @@
 package Interface;
 
+import Departments.HRDepartment;
+import Departments.ITDepartment;
+
+
 public interface DisplayInterface {
 
     void mainMenu();
@@ -30,4 +34,10 @@ public interface DisplayInterface {
     void authDone(boolean result);
 
     void newPassword();
+
+    void userMenu();
+
+    void displayWorkers(HRDepartment hrDepartment);
+
+    void displayUsers(ITDepartment itDepartment);
 }

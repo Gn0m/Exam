@@ -1,11 +1,10 @@
 package Interface;
 
-import Model.User;
 
-import java.util.List;
+import Departments.ITDepartment;
 
 public interface AuthInterface {
 
-    boolean auth(String login, String password);
+    boolean auth(String login, String password, ITDepartment itDepartment);
 
 }

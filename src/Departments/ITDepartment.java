@@ -1,10 +1,10 @@
 package Departments;
-
-import Model.Abstract.Employee;
 import Model.User;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class ITDepartment implements Interface.ITDepartmentInterface {
@@ -14,6 +14,10 @@ public class ITDepartment implements Interface.ITDepartmentInterface {
 
     public ITDepartment() {
         this.users = new ArrayList<>();
+        //тестовое
+        User admin = new User("Леонид","Гущин","Петрович",
+                new GregorianCalendar(1991,12,27),"м","8812843","admin","admin");
+        users.add(admin);
     }
 
     @Override

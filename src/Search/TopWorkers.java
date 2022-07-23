@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TopWorkersInterface implements SearchTopWorkersInterface {
+public class TopWorkers implements SearchTopWorkersInterface {
 
     private Comparator<Worker> comparatorExpensive = Comparator.comparingInt(Worker::getSalary);
     private Comparator<Worker> comparatorDevotees = Comparator.comparingInt(o -> o.getRecruitmentDate().get(Calendar.YEAR));

@@ -4,14 +4,10 @@ import Departments.ITDepartment;
 import Interface.RecoveryInterface;
 
 public class Recovery implements RecoveryInterface {
-    private ITDepartment itDepartment;
 
-    public Recovery(ITDepartment itDepartment) {
-        this.itDepartment = itDepartment;
-    }
 
     @Override
-    public boolean recovery(String login, String newPassword) {
+    public boolean recovery(String login, String newPassword,ITDepartment itDepartment) {
         boolean check = itDepartment.getUsers().stream().anyMatch(user -> user.getLogin().equals(login));
         if (check) {
             itDepartment.getUsers()
