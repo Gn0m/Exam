@@ -1,13 +1,11 @@
 package RegistrationAndAuth;
 
 import Departments.ITDepartment;
-import Interface.RegistrationInterface;
 import Model.User;
 
-public class Registration implements RegistrationInterface {
+public class Registration  {
 
-    @Override
-    public boolean registrationUser(User user,ITDepartment itDepartment) {
+    public static boolean registrationUser(User user,ITDepartment itDepartment) {
         if (itDepartment.getUsers().stream()
                 .anyMatch(object -> object.getLogin().equals(user.getLogin())
                         && object.getPassword().equals(user.getPassword()))){

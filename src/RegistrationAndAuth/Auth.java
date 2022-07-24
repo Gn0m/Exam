@@ -2,16 +2,14 @@ package RegistrationAndAuth;
 
 
 import Departments.ITDepartment;
-import Interface.AuthInterface;
 import Model.Singleton.UserSingleton;
 import Model.User;
 
 
 
-public class Auth implements AuthInterface {
+public class Auth  {
 
-    @Override
-    public boolean auth(String login, String password,ITDepartment itDepartment) {
+    public static boolean auth(String login, String password,ITDepartment itDepartment) {
         User foundUser = itDepartment.getUsers().stream()
                 .filter(user -> user.getLogin().equals(login) && user.getPassword().equals(password))
                 .findFirst().orElse(null);

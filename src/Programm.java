@@ -2,6 +2,8 @@ import ChangeEmployee.ChangeUser;
 import Departments.HRDepartment;
 import Departments.ITDepartment;
 import Display.DisplayInfo;
+import Display.DisplayLists.DisplayLists;
+import Display.UserData.DisplayEmployeeData;
 import Model.Singleton.UserSingleton;
 import Model.User;
 import RegistrationAndAuth.Auth;
@@ -14,10 +16,7 @@ import java.util.Scanner;
 
 class Programm {
     private boolean mainCheck;
-    private DisplayInfo displayInfo;
-    private Registration registration;
-    private Recovery recovery;
-    private Auth auth;
+
     private Scanner sc;
     private boolean authCheck;
     private ITDepartment itDepartment;
@@ -25,13 +24,8 @@ class Programm {
     private ChangeUser changeUser;
 
 
-    Programm(DisplayInfo displayInfo, Registration registration, Recovery recovery, Auth auth,
-             ITDepartment itDepartment, HRDepartment hrDepartment, ChangeUser changeUser) {
+    Programm(ITDepartment itDepartment, HRDepartment hrDepartment, ChangeUser changeUser) {
         authCheck = false;
-        this.displayInfo = displayInfo;
-        this.registration = registration;
-        this.recovery = recovery;
-        this.auth = auth;
         this.itDepartment = itDepartment;
         this.hrDepartment = hrDepartment;
         this.changeUser = changeUser;
@@ -53,7 +47,7 @@ class Programm {
     private void mainMenu() {
 
         while (!authCheck) {
-            displayInfo.mainMenu();
+            DisplayInfo.mainMenu();
             choiceMainMenu(sc.nextInt());
         }
 
@@ -72,27 +66,27 @@ class Programm {
     private void switchActionsMainMenu(int number) {
         sc.nextLine();
         if (number == 1) {
-            registration.registrationUser(createUser(sc), itDepartment);
+            Registration.registrationUser(createUser(sc), itDepartment);
         }
 
         if (number == 2) {
-            displayInfo.login();
+            DisplayEmployeeData.login();
             String login = sc.nextLine();
-            displayInfo.password();
+            DisplayEmployeeData.password();
             String password = sc.nextLine();
-            boolean check = auth.auth(login, password,itDepartment);
-            displayInfo.authDone(check);
+            boolean check = Auth.auth(login, password, itDepartment);
+            DisplayEmployeeData.authDone(check);
             if (check) {
                 authCheck = true;
 
             }
         }
         if (number == 3) {
-            displayInfo.login();
+            DisplayEmployeeData.login();
             String login = sc.nextLine();
-            displayInfo.newPassword();
+            DisplayEmployeeData.newPassword();
             String password = sc.nextLine();
-            recovery.recovery(login, password, itDepartment);
+            Recovery.recovery(login, password, itDepartment);
         }
         if (number == 4) {
             authCheck = true;
@@ -101,34 +95,34 @@ class Programm {
     }
 
     private User createUser(Scanner sc) {
-        displayInfo.secondName();
+        DisplayEmployeeData.secondName();
         String second = sc.nextLine();
-        displayInfo.firstName();
+        DisplayEmployeeData.firstName();
         String first = sc.nextLine();
-        displayInfo.thirdName();
+        DisplayEmployeeData.thirdName();
         String third = sc.nextLine();
-        displayInfo.day();
+        DisplayEmployeeData.day();
         int day = sc.nextInt();
-        displayInfo.month();
+        DisplayEmployeeData.month();
         int month = sc.nextInt();
-        displayInfo.year();
+        DisplayEmployeeData.year();
         int year = sc.nextInt();
         Calendar birthday = new GregorianCalendar(year, month, day);
         sc.nextLine();
-        displayInfo.gender();
+        DisplayEmployeeData.gender();
         String gender = sc.nextLine();
-        displayInfo.phone();
+        DisplayEmployeeData.phone();
         String phone = sc.nextLine();
-        displayInfo.login();
+        DisplayEmployeeData.login();
         String login = sc.nextLine();
-        displayInfo.password();
+        DisplayEmployeeData.password();
         String pas = sc.nextLine();
         return new User(first, second, third, birthday, gender, phone, login, pas);
     }
 
     private void userMenu() {
         while (UserSingleton.isAuth()) {
-            displayInfo.userMenu();
+            DisplayInfo.userMenu();
             choiceUserMenu(sc.nextInt());
         }
     }
@@ -142,20 +136,20 @@ class Programm {
     private void switchActionsUserMenu(int number) {
         sc.nextLine();
         if (number == 1) {
-            displayInfo.login();
+            DisplayEmployeeData.login();
             changeUser.changeLogin(sc.nextLine());
         }
         if (number == 2) {
-            displayInfo.password();
+            DisplayEmployeeData.password();
             changeUser.changePassword(sc.nextLine());
         }
         if (number == 3) {
-            displayInfo.displayUsers(itDepartment);
-            displayInfo.display("Введите номер сотрудника: ");
+            DisplayLists.displayUsers(itDepartment);
+            DisplayInfo.display("Введите номер сотрудника: ");
             int index = sc.nextInt();
-            displayInfo.display("Выберите тип");
+            DisplayInfo.display("Выберите тип");
             while (true) {
-                displayInfo.display("1. Администратор " + "\n" + "2. HR");
+                DisplayInfo.display("1. Администратор " + "\n" + "2. HR");
                 int choice = sc.nextInt();
                 if (choice == 1) {
                     changeUser.changeAdmin(index);
@@ -168,8 +162,8 @@ class Programm {
             }
         }
         if (number == 4) {
-        displayInfo.displayWorkers(hrDepartment);
-        changeUser.setWorker(sc.nextInt());
+            DisplayLists.displayWorkers(hrDepartment);
+            changeUser.setWorker(sc.nextInt());
         }
         if (number == 5) {
             authCheck = false;
