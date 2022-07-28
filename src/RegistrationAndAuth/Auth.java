@@ -9,7 +9,7 @@ import Model.User;
 
 public class Auth  {
 
-    public static boolean auth(String login, String password,ITDepartment itDepartment) {
+    public boolean auth(String login, String password,ITDepartment itDepartment) {
         User foundUser = itDepartment.getUsers().stream()
                 .filter(user -> user.getLogin().equals(login) && user.getPassword().equals(password))
                 .findFirst().orElse(null);

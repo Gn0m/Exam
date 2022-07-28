@@ -1,46 +1,70 @@
 import ChangeEmployee.ChangeUser;
+import ChangeEmployee.ChangeWorker;
 import Departments.HRDepartment;
 import Departments.ITDepartment;
-import Model.Worker;
+import Display.DisplayInfo;
+import Display.DisplayLists.DisplayLists;
+import Display.UserData.DisplayEmployee;
+import Display.UserData.DisplayUser;
+import Display.UserData.DisplayWorker;
+import Model.Creator;
+import RegistrationAndAuth.Auth;
+import RegistrationAndAuth.Recovery;
+import RegistrationAndAuth.Registration;
 import Reports.Reports;
 import Search.SearchWorkers;
 import Search.TopWorkers;
 import SerializeJackson.Serialize;
-import java.io.IOException;
-import java.util.GregorianCalendar;
+import javafx.scene.control.TextFormatter;
+
+class Main {
+
+    private static DisplayInfo displayInfo;
+    private static DisplayEmployee displayEmployee;
+    private static DisplayUser displayUser;
+    private static DisplayWorker displayWorker;
+    private static DisplayLists displayLists;
+    private static ITDepartment itDepartment;
+    private static HRDepartment hrDepartment;
+    private static Reports reports;
+    private static SearchWorkers searchWorkers;
+    private static ChangeUser changeUser;
+    private static ChangeWorker changeWorker;
+    private static Serialize serialize;
+    private static Auth auth;
+    private static Recovery recovery;
+    private static Registration registration;
+    private static Creator creator;
+    private static Launch launch;
 
 
-public class Main {
+    static {
+        displayInfo = new DisplayInfo();
+        displayEmployee = new DisplayEmployee();
+        displayUser = new DisplayUser(displayEmployee);
+        displayWorker = new DisplayWorker(displayEmployee);
+        displayLists = new DisplayLists();
+
+        itDepartment = new ITDepartment();
+        hrDepartment = new HRDepartment();
+        reports = new Reports(new TopWorkers());
+        searchWorkers = new SearchWorkers();
+
+        changeUser = new ChangeUser(displayUser, displayEmployee, displayInfo, displayLists);
+        changeWorker = new ChangeWorker(displayWorker, displayEmployee, displayInfo);
+
+        serialize = new Serialize();
+        auth = new Auth();
+        recovery = new Recovery();
+        registration = new Registration();
+
+        creator = new Creator(displayEmployee,displayUser,displayWorker,displayInfo);
+        launch = new Launch(itDepartment, hrDepartment, reports, searchWorkers, changeWorker, changeUser, serialize,
+                auth, recovery, registration, creator, displayWorker, displayUser, displayEmployee,
+                displayLists, displayInfo);
+    }
 
     public static void main(String[] args) {
-        //тестовое
-        ITDepartment itDepartment = new ITDepartment();
-        HRDepartment hrDepartment = new HRDepartment();
-        Reports reports = new Reports(new SearchWorkers(),new TopWorkers());
-        hrDepartment.addWorker(new Worker("Леонид","Гущин","Петрович",
-                new GregorianCalendar(1991,12,27),"м","8812843",
-                "Программист","Разработки",100500,
-                new GregorianCalendar(1991,11,27),false));
-        hrDepartment.addWorker(new Worker("Людмила","Кучеренко","Александровна",
-                new GregorianCalendar(1991,12,27),"м","8812843",
-                "Программист","Разработки",100500,
-                new GregorianCalendar(1991,11,27),false));
-
-        Programm programm = new Programm(itDepartment,hrDepartment,new ChangeUser(itDepartment,hrDepartment));
-        //тест
-        try {
-           hrDepartment.getWorkers().addAll(Serialize.parseJsonWorker("worker.json"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            Serialize.serializeReportYears(reports.topYearsWorkers(hrDepartment.getWorkers()),"reports.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        // programm.start();
+        launch.start();
     }
 }

@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 
 public class TopWorkers {
 
-    private Comparator<Worker> comparatorExpensive = (o1, o2) -> o2.getSalary() - o1.getSalary();
-    private Comparator<Worker> comparatorDevotees = Comparator.comparingInt(o -> o.getRecruitmentDate().get(Calendar.YEAR));
+    private final Comparator<Worker> comparatorExpensive = (o1, o2) -> o2.getSalary() - o1.getSalary();
+    private final Comparator<Worker> comparatorDevotees = Comparator.comparingInt(o -> o.getRecruitmentDate().get(Calendar.YEAR));
 
 
     public List<Worker> findTopExpensive(List<Worker> workers) {

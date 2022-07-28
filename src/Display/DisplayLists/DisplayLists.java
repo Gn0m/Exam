@@ -1,19 +1,23 @@
 package Display.DisplayLists;
 
-import Departments.HRDepartment;
-import Departments.ITDepartment;
+
+import Model.User;
+import Model.Worker;
+
+import java.util.List;
 
 public class DisplayLists {
 
-    public static void displayWorkers(HRDepartment hrDepartment) {
-        for (int i = 0; i <hrDepartment.getWorkers().size() ; i++) {
-            System.out.println(i+1+" "+hrDepartment.getWorker(i));
+    public void displayWorkers(List<Worker> list) {
+        for (int i = 0; i <list.size() ; i++) {
+            System.out.println(i+1+" "+list.get(i));
         }
+        System.out.print("\n");
     }
 
-    public static void displayUsers(ITDepartment itDepartment) {
-        for (int i = 0; i <itDepartment.getUsers().size() ; i++) {
-            System.out.println(i+1+" "+itDepartment.getUser(i));
+    public void displayUsers(List<User> list) {
+        for (int i = 0; i <list.size() ; i++) {
+            System.out.println(i+1+" "+list.get(i));
         }
     }
 }

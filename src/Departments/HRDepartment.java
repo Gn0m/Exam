@@ -1,35 +1,34 @@
 package Departments;
 
 
+import Interface.EmployeeList;
 import Model.Worker;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.*;
 
-@Setter
-@Getter
-public class HRDepartment {
 
+public class HRDepartment implements EmployeeList<Worker> {
+    @Getter
     private List<Worker> workers;
 
     public HRDepartment() {
         workers = new LinkedList<>();
     }
 
-    public void addWorker(Worker worker) {
+    public void add(Worker worker) {
     workers.add(worker);
     }
 
-    public void deleteWorker(int id) {
+    public void delete(int id) {
     workers.remove(id);
     }
 
-    public void updateWorker(int id, Worker worker) {
+    public void update(int id, Worker worker) {
     workers.set(id,worker);
     }
 
-    public Worker getWorker(int id) {
+    public Worker get(int id) {
         return workers.get(id);
     }
 

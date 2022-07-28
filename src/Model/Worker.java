@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Objects;
 
 @Getter
@@ -55,6 +54,10 @@ public class Worker extends Employee implements Serializable {
         return getSecondName() + " " + getFirstName() + " " + getThirdName() + " " + ", отдел: " + getDepartment()
                 +  ", должность " + getJobTitle() +  ", зарплата: " + getSalary()
                 +  ", дата приема на работу: " + recruitmentDate.getTime();
+    }
+
+    public String fullName(){
+        return getSecondName() + " " + getFirstName() + " " + getThirdName();
     }
 }
 

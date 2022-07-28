@@ -1,97 +1,106 @@
 package ChangeEmployee;
 
-
 import Departments.HRDepartment;
 import Departments.ITDepartment;
 import Display.DisplayInfo;
+import Display.DisplayLists.DisplayLists;
+import Display.UserData.DisplayEmployee;
+import Display.UserData.DisplayUser;
 import Model.Singleton.UserSingleton;
 import Model.User;
 import Model.Worker;
 
-public class ChangeUser  {
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Scanner;
 
-    private ITDepartment itDepartment;
-    private HRDepartment hrDepartment;
+public class ChangeUser {
 
-    public ChangeUser(ITDepartment itDepartment, HRDepartment hrDepartment) {
-        this.itDepartment = itDepartment;
-        this.hrDepartment = hrDepartment;
+    private final DisplayUser displayUser;
+    private final DisplayEmployee displayEmployee;
+    private final DisplayInfo displayInfo;
+    private final DisplayLists displayLists;
+
+    public ChangeUser(DisplayUser displayUser, DisplayEmployee displayEmployee, DisplayInfo displayInfo,
+                      DisplayLists displayLists) {
+        this.displayUser = displayUser;
+        this.displayEmployee = displayEmployee;
+        this.displayInfo = displayInfo;
+        this.displayLists = displayLists;
     }
 
-    public boolean changeLogin(String newLogin) {
-        User user = itDepartment.getUsers().get(UserSingleton.getId());
-        if (user != null) {
-            user.setLogin(newLogin);
-            itDepartment.update(UserSingleton.getId(),user);
-            DisplayInfo.display("Логин изменен");
-            return true;
-        } else {
-            DisplayInfo.display("Не найден пользователь!");
-            return false;
-        }
-    }
-
-    public boolean changePassword(String newPassword) {
-        User user = itDepartment.getUsers().get(UserSingleton.getId());
-        if (user != null) {
-            user.setPassword(newPassword);
-            itDepartment.update(UserSingleton.getId(),user);
-            DisplayInfo.display("Пароль изменен");
-            return true;
-        } else {
-            DisplayInfo.display("Не найден пользователь!");
-            return false;
-        }
-    }
-
-    public boolean changeAdmin(int id) {
-        User user = itDepartment.getUser(id-1);
-        if (user != null) {
-
-            if (user.isAdmin()) {
-                user.setAdmin(false);
-                itDepartment.update(id-1,user);
-                DisplayInfo.display("Признак убран");
-            } else {
-                user.setAdmin(true);
-                DisplayInfo.display("Признак проставлен");
+    public void change(int index, Scanner sc, ITDepartment itDepartment,HRDepartment hrDepartment) {
+        User user = itDepartment.get(index);
+        while (true) {
+            displayUser.choiceParam();
+            displayInfo.display("12. Выход");
+            int param = sc.nextInt();
+            sc.nextLine();
+            if (param == 1) {
+                displayEmployee.secondName();
+                user.setSecondName(sc.nextLine());
             }
-            return true;
-        } else {
-            DisplayInfo.display("Не найден пользователь!");
-            return false;
-        }
-    }
-
-    public boolean changeHr(int id) {
-        User user = itDepartment.getUser(id-1);
-        if (user != null) {
-
-            if (user.isHr()) {
-                user.setHr(false);
-                itDepartment.update(id-1,user);
-                DisplayInfo.display("Признак убран");
-            } else {
-                user.setHr(true);
-                DisplayInfo.display("Признак проставлен");
+            if (param == 2) {
+                displayEmployee.firstName();
+                user.setFirstName(sc.nextLine());
             }
-            return true;
-        } else {
-            DisplayInfo.display("Не найден пользователь!");
-            return false;
+            if (param == 3) {
+                displayEmployee.thirdName();
+                user.setThirdName(sc.nextLine());
+            }
+            if (param == 4) {
+                displayEmployee.day();
+                int day = sc.nextInt();
+                displayEmployee.month();
+                int month = sc.nextInt();
+                displayEmployee.year();
+                int year = sc.nextInt();
+                Calendar birthday = new GregorianCalendar(year, month, day);
+                user.setBirthday(birthday);
+            }
+            if (param == 5) {
+                displayEmployee.gender();
+                user.setGender(sc.nextLine());
+            }
+            if (param == 6) {
+                displayEmployee.phone();
+                user.setPhoneNumber(sc.nextLine());
+            }
+            if (param == 7) {
+                displayUser.login();
+                user.setLogin(sc.nextLine());
+            }
+            if (param == 8) {
+                displayUser.password();
+                user.setPassword(sc.nextLine());
+            }
+            if (param == 9) {
+                displayUser.isAdmin();
+                user.setAdmin(sc.nextBoolean());
+            }
+            if (param == 10) {
+                displayUser.isHR();
+                user.setHr(sc.nextBoolean());
+            }
+            if (param == 11) {
+                displayLists.displayWorkers(hrDepartment.getWorkers());
+                int indexWorker = sc.nextInt()-1;
+                Worker worker = hrDepartment.get(indexWorker);
+                setWorker(worker,itDepartment);
+            }
+            if (param == 12) {
+                break;
+            }
+            itDepartment.update(index, user);
         }
     }
 
-    public boolean setWorker(int id) {
-        Worker worker = hrDepartment.getWorker(id-1);
-        if (worker != null){
+    private void setWorker(Worker worker, ITDepartment itDepartment) {
+        if (worker != null) {
             int index = UserSingleton.getId();
-            User user = itDepartment.getUser(index);
+            User user = itDepartment.get(index);
             user.setWorker(worker);
-            DisplayInfo.display("Сотрудник изменен");
-            return true;
-        } else return false;
+            displayInfo.display("Сотрудник изменен");
+        }
     }
-
-
 }

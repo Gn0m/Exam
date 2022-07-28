@@ -2,22 +2,20 @@ package Reports;
 
 
 import Model.Worker;
-import Search.SearchWorkers;
 import Search.TopWorkers;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Getter
 @Setter
 public class Reports {
-    private SearchWorkers workers;
+
     private TopWorkers topWorkers;
 
-
-    public Reports(SearchWorkers workers, TopWorkers topWorkers) {
-        this.workers = workers;
+    public Reports(TopWorkers topWorkers) {
         this.topWorkers = topWorkers;
 
     }
@@ -49,7 +47,6 @@ public class Reports {
         for (Worker worker : workers) {
             set.add(worker.getDepartment());
         }
-        System.out.println(set);
         for (String s : set) {
             for (Worker worker : workers) {
                 if (worker.getDepartment().equals(s)) {
@@ -64,11 +61,22 @@ public class Reports {
         return list;
     }
 
-    public List<Worker> topSalaryWorkers(List<Worker> workers){
-        return topWorkers.findTopExpensive(workers);
+    public List<String> topSalaryWorkers(List<Worker> workers) {
+        ArrayList<Worker> list = (ArrayList<Worker>) topWorkers.findTopExpensive(workers);
+        ArrayList<String> strings = new ArrayList<>();
+        for (Worker worker : list) {
+            strings.add(worker.toString() + " " + worker.getSalary());
+        }
+        return strings;
     }
 
-    public List<Worker> topYearsWorkers(List<Worker> workers){
-        return topWorkers.findTopDevotees(workers);
+    public List<String> topYearsWorkers(List<Worker> workers) {
+        ArrayList<Worker> list = (ArrayList<Worker>) topWorkers.findTopDevotees(workers);
+        ArrayList<String> strings = new ArrayList<>();
+        for (Worker worker : list) {
+            int years = LocalDate.now().getYear() - worker.getRecruitmentDate().getWeekYear();
+            strings.add(worker.toString() + " ,общее время работы в компании ( год ): " + years);
+        }
+        return strings;
     }
 }
