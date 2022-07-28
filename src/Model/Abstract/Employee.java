@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Calendar;
-import java.util.Date;
 
 @Getter
 @Setter
@@ -23,7 +22,7 @@ public abstract class Employee {
     protected Employee() {
     }
 
-    public Employee(String firstName, String secondName, String thirdName, Calendar birthday, String gender, String phoneNumber) {
+    protected Employee(String firstName, String secondName, String thirdName, Calendar birthday, String gender, String phoneNumber) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.thirdName = thirdName;

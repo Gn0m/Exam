@@ -4,14 +4,15 @@ import Model.Abstract.Employee;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Objects;
 
 @Getter
 @Setter
-public class Worker extends Employee {
+public class Worker extends Employee implements Serializable {
 
+    private static final long serialVersionUID = 167166436050643409L;
     private String jobTitle;
     private String department;
     private int salary;
@@ -51,8 +52,12 @@ public class Worker extends Employee {
     @Override
     public String toString() {
         return getSecondName() + " " + getFirstName() + " " + getThirdName() + " " + ", отдел: " + getDepartment()
-                +  ", должность " + getJobTitle() + "\n" + ", зарплата: " + getSalary()
-                + "\n" + ", дата приема на работу: " + recruitmentDate.getTime();
+                +  ", должность " + getJobTitle() +  ", зарплата: " + getSalary()
+                +  ", дата приема на работу: " + recruitmentDate.getTime();
+    }
+
+    public String fullName(){
+        return getSecondName() + " " + getFirstName() + " " + getThirdName();
     }
 }
 

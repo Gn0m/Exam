@@ -1,55 +1,35 @@
 package Departments;
 
-import Interface.DepartmentsInterface;
+
+import Interface.EmployeeList;
 import Model.Worker;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.*;
 
-@Setter
-@Getter
-public class HRDepartment implements Interface.HRDepartmentInterface, DepartmentsInterface {
 
+public class HRDepartment implements EmployeeList<Worker> {
+    @Getter
     private List<Worker> workers;
-    private Map<String,Worker> departments;
 
     public HRDepartment() {
         workers = new LinkedList<>();
-        departments = new HashMap<>();
     }
 
-
-    @Override
-    public void addWorker(Worker worker) {
+    public void add(Worker worker) {
     workers.add(worker);
     }
 
-    @Override
-    public void deleteWorker(int id) {
+    public void delete(int id) {
     workers.remove(id);
     }
 
-    @Override
-    public void updateWorker(int id, Worker worker) {
+    public void update(int id, Worker worker) {
     workers.set(id,worker);
     }
 
-    @Override
-    public Worker getWorker(int id) {
+    public Worker get(int id) {
         return workers.get(id);
     }
-
-
-    @Override
-    public void addOrUpdateDepartment(String name, Worker worker) {
-        departments.put(name,worker);
-    }
-
-    @Override
-    public void deleteDepartment(String name, Worker worker) {
-        departments.remove(name);
-    }
-
 
 }
